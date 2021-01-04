@@ -2,7 +2,7 @@
   "name": "digrest",
   "productName": "digrest",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Cross-platform RestAPI tester built with electron",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -53,6 +53,13 @@
     "@electron-forge/maker-rpm": "6.0.0-beta.52",
     "@electron-forge/maker-squirrel": "6.0.0-beta.52",
     "@electron-forge/maker-zip": "6.0.0-beta.52",
-    "electron": "11.1.1"
+    "electron": "11.1.1",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-sass": "^4.1.0",
+    "gulp-terser": "^1.4.0",
+    "pug": "^3.0.0"
   }
 }
