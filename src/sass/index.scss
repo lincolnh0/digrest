@@ -3,12 +3,17 @@
     margin-bottom: 30px;
 }
 
-#protocol-switch {
- 
-    &:hover {
-        cursor: pointer;
-        background-color: #007bff;
-        color: white;
+.table {
+    .key-column {
+        width: 17%;
     }
-    transition: 500ms;
+    .value-column {
+        width: 30%;
+    }
+    .description-column {
+        width: 45%;
+    }
+    .operation-column {
+        width: 8%;
+    }
 }
