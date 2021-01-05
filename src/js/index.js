@@ -24,7 +24,7 @@ function add_event_listeners_to_form() {
     const urlTextbox = document.getElementById('textbox-url');
     urlTextbox.addEventListener('keyup', updateFullUrl)
 
-    addRowToTable()
+    clearTable()
 }
 
 // Override default submit button.
@@ -134,9 +134,12 @@ async function http_request(url, httpMethod) {
         });
         const responseContent = await response.json();
         responseTextArea.value = JSON.stringify(responseContent, null, 4);
+
+        document.querySelectorAll('a[href="#response-pane"]')[0].click()
     } catch (err) {
         responseTextArea.value = err;
     }
+
 }
 
 

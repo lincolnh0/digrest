@@ -7,29 +7,38 @@ html(lang="en")
         title Digrest API Tester
     body
         .container
-            .row
-                .col-md-3
-                .col-md-9
-                    form#digrest-form(action="")
-                        .form-row
-                            .form-group.col-md-10
-                                label(for="textbox-url") Endpoint
-                                .input-group
-                                    .input-group-prepend
-                                        #protocol-switch.input-group-text.btn.btn-primary
-                                            | http://
-                                    input#textbox-url.form-control(type="text")
-                            .form-group.col-md-2
-                                label(for="select-request") Method
-                                select#select-request.form-control
-                                    option(value="GET") GET
-                                    option(value="POST") POST
-                                    option(value="PUT") PUT
-                                    option(value="DELETE") DELETE
-                                    option(value="HEAD") HEAD
-                                    option(value="CONNECT") CONNECT
-                                    option(value="TRACE") TRACE
-                                    option(value="OPTIONS") OPTIONS
+
+            form#digrest-form(action="")
+                .form-row
+                    .form-group.col-md-10
+                        label(for="textbox-url") Endpoint
+                        .input-group
+                            .input-group-prepend
+                                #protocol-switch.input-group-text.btn.btn-primary
+                                    | https://
+                            input#textbox-url.form-control(type="text", value="pokeapi.co/api/v2/pokemon/charizard")
+                    .form-group.col-md-2
+                        label(for="select-request") Method
+                        select#select-request.form-control
+                            option(value="GET") GET
+                            option(value="POST") POST
+                            option(value="PUT") PUT
+                            option(value="DELETE") DELETE
+                            option(value="HEAD") HEAD
+                            option(value="CONNECT") CONNECT
+                            option(value="TRACE") TRACE
+                            option(value="OPTIONS") OPTIONS
+                
+                ul.nav.nav-tabs.nav-fill
+                    li.nav-item
+                        a.nav-link.active(data-toggle="tab", href="#parameter-pane", aria-expanded="false") Parameters
+                    li.nav-item
+                        a.nav-link(data-toggle="tab", href="#header-pane", aria-expanded="false") Header
+                    li.nav-item
+                        a.nav-link(data-toggle="tab", href="#response-pane", aria-expanded="false") Response
+                
+                .tab-content
+                    #parameter-pane.tab-pane.fade.active.in.show
                         .form-group
                             label(for="table-parameters") Parameters
                             table#table-parameters.table.table-bordered.table-striped.table-hover.table-condensed.text-center
@@ -45,18 +54,25 @@ html(lang="en")
                                     button#btn-add-row.btn.btn-success.form-control(type="button") Add row
                                 .form-group.col-md-2
                                     button#btn-clear-table.btn.btn-danger.form-control(type="button") Clear table
+                    #header-pane.tab-pane.fade
                         .form-group
                             label(for="textarea-header") Header
                             textarea#textarea-header.form-control(cols="10", rows="5")
-                        .form-group.row
-                                label.col-sm-2.col-form-label(for="textbox-full-url") Full URL
-                                input#textbox-full-url.form-control-plaintext.col-sm-10(type="text", readonly)
+                        
+                    #response-pane.tab-pane.fade
+
                         .form-group
                             label(for="textarea-response") Response
                             textarea#textarea-response.form-control(cols="10", rows="10", readonly)
-                        .form-row
-                            .form-group.col-md-2
-                                button#btn-submit.form-control.btn.btn-primary(type="submit") Request
-                            .form-group.col-md-2
-                                button.form-control.btn.btn-light(type="button") Copy
+                .form-group.row
+                    label.col-sm-2.col-form-label(for="textbox-full-url") Full URL
+                    input#textbox-full-url.form-control-plaintext.col-sm-10(type="text", readonly)
+                
+                .form-row
+                    .form-group.col-md-2
+                        button#btn-submit.form-control.btn.btn-primary(type="submit") Request
+                    .form-group.col-md-2
+                        button.form-control.btn.btn-light(type="button") Copy
+        script(src="../js/jquery-3.5.1.min.js")
+        script(src="../js/bootstrap.min.js")
         script(src="../js/index.js")
