@@ -2,7 +2,41 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="../css/bootstrap.min.css")
+        link(rel="stylesheet", href="../css/index.css")
         title Digrest API Tester
     body
         .container
-            h1 Hello world!!
+            form#digrest-form(action="")
+                .form-row
+                    .form-group.col-md-10
+                        label(for="textbox-url") URL
+                        .input-group
+                            .input-group-prepend
+                                #protocol-switch.input-group-text
+                                    | http://
+                            input#textbox-url.form-control(type="text")
+                    .form-group.col-md-2
+                        label(for="select-request") Method
+                        select#select-request.form-control
+                            option(value="GET") GET
+                            option(value="POST") POST
+                            option(value="PUT") PUT
+                            option(value="DELETE") DELETE
+                            option(value="HEAD") HEAD
+                            option(value="CONNECT") CONNECT
+                            option(value="TRACE") TRACE
+                            option(value="OPTIONS") OPTIONS
+                        
+                .form-group
+                    label(for="textarea-header") Header
+                    textarea#textarea-header.form-control(cols="10", rows="5", readonly)
+                .form-group
+                    label(for="textarea-response") Response
+                    textarea#textarea-response.form-control(cols="10", rows="10", readonly)
+                .form-row
+                    .form-group.col-md-2
+                        button#btn-submit.form-control.btn.btn-primary(type="submit") Request
+                    .form-group.col-md-2
+                        button.form-control.btn.btn-light(type="button") Copy
+        script(src="../js/index.js")
