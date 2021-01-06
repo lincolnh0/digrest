@@ -7,7 +7,8 @@ function ready(fn) {
     }
 }
 
-function add_event_listeners_to_form() {    
+function add_event_listeners_to_form() {
+    // Add form related event listeners.
     const submitBtn = document.getElementById('btn-submit');
     submitBtn.addEventListener('click', submitForm)
 
@@ -15,6 +16,7 @@ function add_event_listeners_to_form() {
     protocolBlock.addEventListener('click', toggleProtocol);
     protocolBlock.addEventListener('click', updateFullUrl);
 
+    // Add table related buttons event listeners.
     const addParameterRowBtn = document.getElementById('btn-parameter-add-row');
     addParameterRowBtn.addEventListener('click', addRowToTable)
     addParameterRowBtn.tableId = 'table-parameters';
@@ -32,7 +34,14 @@ function add_event_listeners_to_form() {
     clearHeaderTableBtn.addEventListener('click', clearTable)
     clearHeaderTableBtn.tableId = 'table-header';
 
+    // Add copy and convert event listeners.
+    const copyBtn = document.getElementById('btn-copy')
+    copyBtn.addEventListener('click', copyOutput)
 
+    const convertBtn = document.getElementById('btn-convert')
+    convertBtn.addEventListener('click', toggleOutputFormat)
+
+    // Add event listener to update full URL.
     const urlTextbox = document.getElementById('textbox-url');
     urlTextbox.addEventListener('keyup', updateFullUrl)
 
@@ -62,8 +71,51 @@ function submitForm(event) {
 function toggleProtocol() {
     const protocolBlock = document.getElementById('protocol-switch');
     protocolBlock.innerText = protocolBlock.innerText == 'http://' ? 'https://' : 'http://';
-    
+}
 
+// Toggle between JSON and YAML.
+function toggleOutputFormat(event) {
+    const convertBtn = event.currentTarget;
+    const responseTextArea = document.getElementById('textarea-response');
+
+    if (convertBtn.dataset.format == 'yaml') {
+        responseTextArea.value = window.digrest.yamlDump(responseObj)
+    }
+    else {
+        responseTextArea.value = JSON.stringify(responseObj, null, 4)
+    }
+
+    convertBtn.dataset.format = convertBtn.dataset.format == 'yaml' ? 'json' : 'yaml';
+    convertBtn.innerText = 'Convert to ' + convertBtn.dataset.format.toUpperCase()
+}
+
+// Copy output to clipboard.
+function copyOutput(event) {
+    const copyBtn = event.currentTarget;
+    const clipboardIcon = copyBtn.firstChild;
+
+    const responseTextArea = document.getElementById('textarea-response');
+    navigator.clipboard.writeText(responseTextArea.value);
+
+    clipboardIcon.classList.add('fa-clipboard-check');
+    clipboardIcon.classList.remove('fa-clipboard');
+    
+    const temporaryText = document.createTextNode('Copied')
+    copyBtn.removeChild(copyBtn.lastChild)
+    copyBtn.appendChild(temporaryText)
+
+    setTimeout(() => {
+        const copyBtn = document.getElementById('btn-copy')
+        const clipboardIcon = copyBtn.firstChild;
+        const originalText = document.createTextNode('Copy')
+
+        copyBtn.removeChild(copyBtn.lastChild)
+        copyBtn.appendChild(originalText)
+
+        clipboardIcon.classList.remove('fa-clipboard-check')
+        clipboardIcon.classList.add('fa-clipboard')
+    }, 3000);
+  
 }
 
 function clearTable(event) {
@@ -158,15 +210,17 @@ async function http_request(url, httpMethod) {
         const response = await fetch(url, {
             method: httpMethod
         });
-        const responseContent = await response.json();
-        responseTextArea.value = JSON.stringify(responseContent, null, 4);
+        responseObj = await response.json();
+        responseTextArea.value = JSON.stringify(responseObj, null, 4);
 
-        document.querySelectorAll('a[href="#response-pane"]')[0].click()
     } catch (err) {
         responseTextArea.value = err;
     }
+    document.querySelectorAll('a[href="#response-pane"]')[0].click()
+    
+    
 
 }
 
-
+let responseObj;
 ready(add_event_listeners_to_form)

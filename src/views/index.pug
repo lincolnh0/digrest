@@ -3,6 +3,7 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="../css/bootstrap.min.css")
+        link(rel="stylesheet", href="../css/fa.css")
         link(rel="stylesheet", href="../css/index.css")
         title Digrest API Tester
     body
@@ -40,6 +41,10 @@ html(lang="en")
                     li.nav-item
                         a.nav-link(data-toggle="tab", href="#header-pane", aria-expanded="false") Header
                     li.nav-item
+                        a.nav-link(data-toggle="tab", href="#authorisation-pane", aria-expanded="false") Authorisation
+                    li.nav-item
+                        a.nav-link(data-toggle="tab", href="#cookie-pane", aria-expanded="false") Cookie
+                    li.nav-item
                         a.nav-link(data-toggle="tab", href="#response-pane", aria-expanded="false") Response
                 
                 .tab-content
@@ -74,15 +79,23 @@ html(lang="en")
                                 .form-group.col-md-2
                                     button#btn-header-add-row.btn.btn-success.form-control(type="button") Add row
                                 .form-group.col-md-2
-                                    button#btn-header-clear-table.btn.btn-danger.form-control(type="button") Clear table
-                        
+                                    button#btn-header-clear-table.btn.btn-danger.form-control(type="button") Clear table       
+                    
+                    #authorisation-pane.tab-pane
+                    
+                    #cookie-pane.tab-pane
+                    
                     #response-pane.tab-pane
-
                         .form-group
                             label(for="textarea-response") Response
                             textarea#textarea-response.form-control(rows="20", readonly)
-                        .form-group
-                            button.col-sm-2.form-control.btn.btn-dark(type="button") Copy
+                        .form-row
+                            .col-sm-2
+                                button#btn-copy.form-control.btn.btn-dark(type="button")
+                                    i.fas.fa-clipboard.pr-2
+                                    |Copy
+                            .col-sm-2
+                                button#btn-convert.form-control.btn.btn-light(type="button", data-format="yaml") Convert to YAML
                 
         script(src="../js/jquery-3.5.1.min.js")
         script(src="../js/bootstrap.min.js")

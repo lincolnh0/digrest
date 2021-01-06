@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/fa.css"/>
     <link rel="stylesheet" href="../css/index.css"/>
     <title>Digrest API Tester</title>
   </head>
@@ -44,6 +45,8 @@
         <ul class="nav nav-tabs nav-fill">
           <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#parameter-pane" aria-expanded="false">Parameters</a></li>
           <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#header-pane" aria-expanded="false">Header</a></li>
+          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#authorisation-pane" aria-expanded="false">Authorisation</a></li>
+          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cookie-pane" aria-expanded="false">Cookie</a></li>
           <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#response-pane" aria-expanded="false">Response</a></li>
         </ul>
         <div class="tab-content">
@@ -90,18 +93,25 @@
                   <button class="btn btn-success form-control" id="btn-header-add-row" type="button">Add row</button>
                 </div>
                 <div class="form-group col-md-2">
-                  <button class="btn btn-danger form-control" id="btn-header-clear-table" type="button">Clear table</button>
+                  <button class="btn btn-danger form-control" id="btn-header-clear-table" type="button">Clear table       </button>
                 </div>
               </div>
             </div>
           </div>
+          <div class="tab-pane" id="authorisation-pane"></div>
+          <div class="tab-pane" id="cookie-pane"></div>
           <div class="tab-pane" id="response-pane">
             <div class="form-group">
               <label for="textarea-response">Response</label>
               <textarea class="form-control" id="textarea-response" rows="20" readonly="readonly"></textarea>
             </div>
-            <div class="form-group">
-              <button class="col-sm-2 form-control btn btn-dark" type="button">Copy</button>
+            <div class="form-row">
+              <div class="col-sm-2">
+                <button class="form-control btn btn-dark" id="btn-copy" type="button"><i class="fas fa-clipboard pr-2"></i>Copy</button>
+              </div>
+              <div class="col-sm-2">
+                <button class="form-control btn btn-light" id="btn-convert" type="button" data-format="yaml">Convert to YAML</button>
+              </div>
             </div>
           </div>
         </div>

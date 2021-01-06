@@ -1,20 +1,29 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const yaml = require('js-yaml');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
 
-const createWindow = () => {
+let win;
+
+async function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1600,
     height: 900,
+    webPreferences: {
+      contextIsolation: true, // protect against prototype pollution
+      enableRemoteModule: false, // turn off remote
+      preload: path.join(__dirname, 'preload.js'), // use a preload script
+    }
   });
 
+
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, '../dist/html/index.html'));
+  win.loadFile(path.join(__dirname, '../dist/html/index.html'));
 
 };
 
@@ -22,6 +31,16 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
+
+ipcMain.on("toMain", (event, args) => {
+  console.log(args)
+  // yaml.dump("path/to/file", (error, data) => {
+  //   // Do something with file contents
+
+  //   // Send result back to renderer process
+  //   win.webContents.send("fromMain", responseObj);
+  // });
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

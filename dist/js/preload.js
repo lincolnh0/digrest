@@ -1,0 +1,1 @@
+const{contextBridge:contextBridge,ipcRenderer:ipcRenderer}=require("electron");console.log("helo"),contextBridge.exposeInMainWorld("api",{send:(e,n)=>{["toMain"].includes(e)&&ipcRenderer.send(e,n)},receive:(e,n)=>{["fromMain"].includes(e)&&ipcRenderer.on(e,((e,...o)=>n(...o)))},test:()=>{console.log("hello")}});
