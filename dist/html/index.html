@@ -11,8 +11,7 @@
     <div class="container">
       <form id="digrest-form" action="">
         <div class="form-row">
-          <div class="form-group col-md-10">
-            <label for="textbox-url">Endpoint</label>
+          <div class="form-group col-md-8">
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text btn btn-primary" id="protocol-switch">https://</div>
@@ -21,7 +20,6 @@
             </div>
           </div>
           <div class="form-group col-md-2">
-            <label for="select-request">Method</label>
             <select class="form-control" id="select-request">
               <option value="GET">GET</option>
               <option value="POST">POST</option>
@@ -33,6 +31,15 @@
               <option value="OPTIONS">OPTIONS</option>
             </select>
           </div>
+          <div class="form-group col-md-2">
+            <button class="form-control btn btn-primary" id="btn-submit" type="submit">Request</button>
+          </div>
+        </div>
+        <div class="form-row form-group">
+          <div class="form-row col-md-10">
+            <label class="col-nd-2 col-form-label" for="textbox-full-url">Full URL</label>
+            <input class="form-control-plaintext col-sm-10" id="textbox-full-url" type="text" readonly="readonly"/>
+          </div>
         </div>
         <ul class="nav nav-tabs nav-fill">
           <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#parameter-pane" aria-expanded="false">Parameters</a></li>
@@ -40,9 +47,9 @@
           <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#response-pane" aria-expanded="false">Response</a></li>
         </ul>
         <div class="tab-content">
-          <div class="tab-pane fade active in show" id="parameter-pane">
+          <div class="tab-pane active in show" id="parameter-pane">
             <div class="form-group">
-              <label for="table-parameters">Parameters</label>
+              <label for="table-parameters">Key, value pairs that will form the arguments of in the full URL</label>
               <table class="table table-bordered table-striped table-hover table-condensed text-center" id="table-parameters">
                 <thead>
                   <tr>
@@ -56,37 +63,46 @@
               </table>
               <div class="form-row">
                 <div class="form-group col-md-2">
-                  <button class="btn btn-success form-control" id="btn-add-row" type="button">Add row</button>
+                  <button class="btn btn-success form-control" id="btn-parameter-add-row" type="button">Add row</button>
                 </div>
                 <div class="form-group col-md-2">
-                  <button class="btn btn-danger form-control" id="btn-clear-table" type="button">Clear table</button>
+                  <button class="btn btn-danger form-control" id="btn-parameter-clear-table" type="button">Clear table</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="header-pane">
+          <div class="tab-pane" id="header-pane">
             <div class="form-group">
-              <label for="textarea-header">Header</label>
-              <textarea class="form-control" id="textarea-header" cols="10" rows="5"></textarea>
+              <label for="table-header">Object that contains more complex requests such as application type, authorisation etc.</label>
+              <table class="table table-bordered table-striped table-hover table-condensed text-center" id="table-header">
+                <thead>
+                  <tr>
+                    <th class="operation-column">Active</th>
+                    <th class="key-column">Key</th>
+                    <th class="value-column">Value</th>
+                    <th class="description-column">Description</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <button class="btn btn-success form-control" id="btn-header-add-row" type="button">Add row</button>
+                </div>
+                <div class="form-group col-md-2">
+                  <button class="btn btn-danger form-control" id="btn-header-clear-table" type="button">Clear table</button>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="response-pane">
+          <div class="tab-pane" id="response-pane">
             <div class="form-group">
               <label for="textarea-response">Response</label>
-              <textarea class="form-control" id="textarea-response" cols="10" rows="10" readonly="readonly"></textarea>
+              <textarea class="form-control" id="textarea-response" rows="20" readonly="readonly"></textarea>
             </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="textbox-full-url">Full URL</label>
-          <input class="form-control-plaintext col-sm-10" id="textbox-full-url" type="text" readonly="readonly"/>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-2">
-            <button class="form-control btn btn-primary" id="btn-submit" type="submit">Request</button>
-          </div>
-          <div class="form-group col-md-2">
-            <button class="form-control btn btn-light" type="button">Copy</button>
+            <div class="form-group">
+              <button class="col-sm-2 form-control btn btn-dark" type="button">Copy</button>
+            </div>
           </div>
         </div>
       </form>

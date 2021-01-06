@@ -10,15 +10,13 @@ html(lang="en")
 
             form#digrest-form(action="")
                 .form-row
-                    .form-group.col-md-10
-                        label(for="textbox-url") Endpoint
+                    .form-group.col-md-8
                         .input-group
                             .input-group-prepend
                                 #protocol-switch.input-group-text.btn.btn-primary
                                     | https://
                             input#textbox-url.form-control(type="text", value="pokeapi.co/api/v2/pokemon/charizard")
                     .form-group.col-md-2
-                        label(for="select-request") Method
                         select#select-request.form-control
                             option(value="GET") GET
                             option(value="POST") POST
@@ -28,7 +26,14 @@ html(lang="en")
                             option(value="CONNECT") CONNECT
                             option(value="TRACE") TRACE
                             option(value="OPTIONS") OPTIONS
-                
+                    .form-group.col-md-2
+                        button#btn-submit.form-control.btn.btn-primary(type="submit") Request
+                .form-row.form-group
+                    .form-row.col-md-10
+                        label.col-nd-2.col-form-label(for="textbox-full-url") Full URL
+                        input#textbox-full-url.form-control-plaintext.col-sm-10(type="text", readonly)
+                    
+
                 ul.nav.nav-tabs.nav-fill
                     li.nav-item
                         a.nav-link.active(data-toggle="tab", href="#parameter-pane", aria-expanded="false") Parameters
@@ -38,9 +43,9 @@ html(lang="en")
                         a.nav-link(data-toggle="tab", href="#response-pane", aria-expanded="false") Response
                 
                 .tab-content
-                    #parameter-pane.tab-pane.fade.active.in.show
+                    #parameter-pane.tab-pane.active.in.show
                         .form-group
-                            label(for="table-parameters") Parameters
+                            label(for="table-parameters") Key, value pairs that will form the arguments of in the full URL
                             table#table-parameters.table.table-bordered.table-striped.table-hover.table-condensed.text-center
                                 thead
                                     tr
@@ -51,28 +56,34 @@ html(lang="en")
                                 tbody
                             .form-row
                                 .form-group.col-md-2
-                                    button#btn-add-row.btn.btn-success.form-control(type="button") Add row
+                                    button#btn-parameter-add-row.btn.btn-success.form-control(type="button") Add row
                                 .form-group.col-md-2
-                                    button#btn-clear-table.btn.btn-danger.form-control(type="button") Clear table
-                    #header-pane.tab-pane.fade
+                                    button#btn-parameter-clear-table.btn.btn-danger.form-control(type="button") Clear table
+                    #header-pane.tab-pane
                         .form-group
-                            label(for="textarea-header") Header
-                            textarea#textarea-header.form-control(cols="10", rows="5")
+                            label(for="table-header") Object that contains more complex requests such as application type, authorisation etc.
+                            table#table-header.table.table-bordered.table-striped.table-hover.table-condensed.text-center
+                                thead
+                                    tr
+                                        th.operation-column Active
+                                        th.key-column Key
+                                        th.value-column Value
+                                        th.description-column Description
+                                tbody
+                            .form-row
+                                .form-group.col-md-2
+                                    button#btn-header-add-row.btn.btn-success.form-control(type="button") Add row
+                                .form-group.col-md-2
+                                    button#btn-header-clear-table.btn.btn-danger.form-control(type="button") Clear table
                         
-                    #response-pane.tab-pane.fade
+                    #response-pane.tab-pane
 
                         .form-group
                             label(for="textarea-response") Response
-                            textarea#textarea-response.form-control(cols="10", rows="10", readonly)
-                .form-group.row
-                    label.col-sm-2.col-form-label(for="textbox-full-url") Full URL
-                    input#textbox-full-url.form-control-plaintext.col-sm-10(type="text", readonly)
+                            textarea#textarea-response.form-control(rows="20", readonly)
+                        .form-group
+                            button.col-sm-2.form-control.btn.btn-dark(type="button") Copy
                 
-                .form-row
-                    .form-group.col-md-2
-                        button#btn-submit.form-control.btn.btn-primary(type="submit") Request
-                    .form-group.col-md-2
-                        button.form-control.btn.btn-light(type="button") Copy
         script(src="../js/jquery-3.5.1.min.js")
         script(src="../js/bootstrap.min.js")
         script(src="../js/index.js")

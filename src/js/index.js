@@ -15,16 +15,39 @@ function add_event_listeners_to_form() {
     protocolBlock.addEventListener('click', toggleProtocol);
     protocolBlock.addEventListener('click', updateFullUrl);
 
-    const addRowBtn = document.getElementById('btn-add-row');
-    addRowBtn.addEventListener('click', addRowToTable)
+    const addParameterRowBtn = document.getElementById('btn-parameter-add-row');
+    addParameterRowBtn.addEventListener('click', addRowToTable)
+    addParameterRowBtn.tableId = 'table-parameters';
 
-    const clearTableBtn = document.getElementById('btn-clear-table');
-    clearTableBtn.addEventListener('click', clearTable)
+    const addHeaderRowBtn = document.getElementById('btn-header-add-row');
+    addHeaderRowBtn.addEventListener('click', addRowToTable)
+    addHeaderRowBtn.tableId = 'table-header';
+
+    const clearParameterTableBtn = document.getElementById('btn-parameter-clear-table');
+    clearParameterTableBtn.addEventListener('click', clearTable)
+    clearParameterTableBtn.tableId = 'table-parameters';
+
+
+    const clearHeaderTableBtn = document.getElementById('btn-header-clear-table');
+    clearHeaderTableBtn.addEventListener('click', clearTable)
+    clearHeaderTableBtn.tableId = 'table-header';
+
 
     const urlTextbox = document.getElementById('textbox-url');
     urlTextbox.addEventListener('keyup', updateFullUrl)
 
-    clearTable()
+    const initialTableObjects = [
+        {
+            currentTarget: { tableId: 'table-parameters' }
+        },
+        {
+            currentTarget: { tableId: 'table-header' }
+        }
+    ]
+    initialTableObjects.forEach((element) => {
+        addRowToTable(element)
+    })
+    updateFullUrl()
 }
 
 // Override default submit button.
@@ -39,59 +62,62 @@ function submitForm(event) {
 function toggleProtocol() {
     const protocolBlock = document.getElementById('protocol-switch');
     protocolBlock.innerText = protocolBlock.innerText == 'http://' ? 'https://' : 'http://';
-    changeFormAction()
+    
 
 }
 
-function clearTable() {
-    const parametersTableBody = document.getElementById('table-parameters').getElementsByTagName('tbody')[0];
-    
-    while (parametersTableBody.childElementCount > 0) {
-        parametersTableBody.removeChild(parametersTableBody.lastChild)
+function clearTable(event) {
+    if (event != null) {
+        const parametersTableBody = document.getElementById(event.currentTarget.tableId).getElementsByTagName('tbody')[0];
+        while (parametersTableBody.childElementCount > 0) {
+            parametersTableBody.removeChild(parametersTableBody.lastChild)
+        }
+        addRowToTable(event)
     }
-
-    updateFullUrl()
-    addRowToTable()
+    
 }
 
-function addRowToTable() {
-    const parametersTableBody = document.getElementById('table-parameters').getElementsByTagName('tbody')[0];
-    const newRowId = parametersTableBody.childElementCount;
+function addRowToTable(event) {
+    if (event != null) {
+        const parametersTableBody = document.getElementById(event.currentTarget.tableId).getElementsByTagName('tbody')[0];
+        
+        const newRowId = parametersTableBody.childElementCount;
+        const dataType = event.currentTarget.tableId.replace('table-', '');
 
-    let newRow = document.createElement('tr')
-    
-    let newCheckboxCell = document.createElement('td')
-    let newCheckbox = document.createElement('input');
-    newCheckbox.type = 'checkbox';
-    newCheckbox.checked = true;
-    newCheckbox.classList.add('form-control-sm')
-    newCheckbox.id = 'checkbox-active-parameter-' + newRowId;
+        let newRow = document.createElement('tr')
+        
+        let newCheckboxCell = document.createElement('td')
+        let newCheckbox = document.createElement('input');
+        newCheckbox.type = 'checkbox';
+        newCheckbox.checked = true;
+        newCheckbox.classList.add('form-control-sm')
+        newCheckbox.id = 'checkbox-active-' + dataType + '-' + newRowId;
 
-    newCheckboxCell.appendChild(newCheckbox)
-    newRow.appendChild(newCheckboxCell)
+        newCheckboxCell.appendChild(newCheckbox)
+        newRow.appendChild(newCheckboxCell)
 
-    let newKeyCell = document.createElement('td')
-    newKeyCell.id = 'parameter-key-' + newRowId;
-    newKeyCell.contentEditable = true;
-    newKeyCell.addEventListener('keyup', updateFullUrl)
+        let newKeyCell = document.createElement('td')
+        newKeyCell.id = dataType + '-key-' + newRowId;
+        newKeyCell.contentEditable = true;
+        newKeyCell.addEventListener('keyup', updateFullUrl)
 
-    newRow.appendChild(newKeyCell)
+        newRow.appendChild(newKeyCell)
 
-    let newValueCell = document.createElement('td')
-    newValueCell.id = 'parameter-value-' + newRowId;
-    newValueCell.contentEditable = true;
-    newValueCell.addEventListener('keyup', updateFullUrl)
+        let newValueCell = document.createElement('td')
+        newValueCell.id = dataType + '-value-' + newRowId;
+        newValueCell.contentEditable = true;
+        newValueCell.addEventListener('keyup', updateFullUrl)
 
-    newRow.appendChild(newValueCell)
+        newRow.appendChild(newValueCell)
 
-    let newDescriptionCell = document.createElement('td')
-    newDescriptionCell.id = 'parameter-description-' + newRowId;
-    newDescriptionCell.contentEditable = true;
+        let newDescriptionCell = document.createElement('td')
+        newDescriptionCell.id = dataType + '-description-' + newRowId;
+        newDescriptionCell.contentEditable = true;
 
-    newRow.appendChild(newDescriptionCell)
+        newRow.appendChild(newDescriptionCell)
 
-    parametersTableBody.appendChild(newRow)
-   
+        parametersTableBody.appendChild(newRow)
+    }
 }
 
 function updateFullUrl() {
@@ -106,14 +132,14 @@ function updateFullUrl() {
     fullUrlTextbox.value = protocolBlock.innerText + urlTextbox.value;
 
     // Build query parameters onto URL.
-    if (parametersTableBody.firstChild && document.getElementById('parameter-key-0').innerText != '') {
+    if (parametersTableBody.firstChild && document.getElementById('parameters-key-0').innerText != '') {
         fullUrlTextbox.value += '?'
         for (let [index, row] of parametersTableBody.childNodes.entries()) {
-            if (document.getElementById('checkbox-active-parameter-' + index).checked) {
-                fullUrlTextbox.value += document.getElementById('parameter-key-' + index).innerText
+            if (document.getElementById('checkbox-active-parameters-' + index).checked) {
+                fullUrlTextbox.value += document.getElementById('parameters-key-' + index).innerText
 
-                if (document.getElementById('parameter-value-' + index).innerText != '') {
-                    fullUrlTextbox.value += '=' + document.getElementById('parameter-value-' + index).innerText
+                if (document.getElementById('parameters-value-' + index).innerText != '') {
+                    fullUrlTextbox.value += '=' + document.getElementById('parameters-value-' + index).innerText
                 }
     
                 if (row != parametersTableBody.lastChild) {
