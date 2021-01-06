@@ -150,21 +150,21 @@ function addRowToTable(event) {
 
         let newKeyCell = document.createElement('td')
         newKeyCell.id = dataType + '-key-' + newRowId;
-        newKeyCell.contentEditable = true;
+        newKeyCell.contentEditable = "plaintext-only";
         newKeyCell.addEventListener('keyup', updateFullUrl)
 
         newRow.appendChild(newKeyCell)
 
         let newValueCell = document.createElement('td')
         newValueCell.id = dataType + '-value-' + newRowId;
-        newValueCell.contentEditable = true;
+        newValueCell.contentEditable = "plaintext-only";
         newValueCell.addEventListener('keyup', updateFullUrl)
 
         newRow.appendChild(newValueCell)
 
         let newDescriptionCell = document.createElement('td')
         newDescriptionCell.id = dataType + '-description-' + newRowId;
-        newDescriptionCell.contentEditable = true;
+        newDescriptionCell.contentEditable = "plaintext-only";
 
         newRow.appendChild(newDescriptionCell)
 
@@ -206,10 +206,13 @@ function updateFullUrl() {
 
 async function http_request(url, httpMethod) {
     const responseTextArea = document.getElementById('textarea-response');
+    const headerObj = constructHeaderObject();
     try {
-        const response = await fetch(url, {
+        const requestObject = {
             method: httpMethod
-        });
+        }
+        if (headerObj != null) requestObject.headers = headerObj;
+        const response = await fetch(url, requestObject);
         responseObj = await response.json();
         responseTextArea.value = JSON.stringify(responseObj, null, 4);
 
@@ -217,9 +220,23 @@ async function http_request(url, httpMethod) {
         responseTextArea.value = err;
     }
     document.querySelectorAll('a[href="#response-pane"]')[0].click()
-    
-    
+}
 
+function constructHeaderObject() {
+    const headerTableBody = document.getElementById('table-header').getElementsByTagName('tbody')[0];
+    if (headerTableBody.firstChild && document.getElementById('header-key-0').innerText != '') {
+        let returnObject = {};
+        for (let [index, row] of headerTableBody.childNodes.entries()) {
+            if (document.getElementById('checkbox-active-header-' + index).checked) {
+                
+                const key = document.getElementById('header-key-' + index).innerText
+                const value = document.getElementById('header-value-' + index).innerText
+                
+                returnObject[key] = value;
+            }
+        }
+        return returnObject;
+    }
 }
 
 let responseObj;
