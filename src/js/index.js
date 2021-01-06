@@ -220,6 +220,10 @@ async function http_request(url, httpMethod) {
         responseTextArea.value = err;
     }
     document.querySelectorAll('a[href="#response-pane"]')[0].click()
+
+    const convertBtn = document.getElementById('btn-convert');
+    convertBtn.dataset.format = 'yaml';
+    convertBtn.innerText = 'Convert to YAML';
 }
 
 function constructHeaderObject() {
