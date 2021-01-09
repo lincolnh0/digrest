@@ -12,7 +12,7 @@ let win;
 async function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 1600,
+    width: 1400,
     height: 900,
     webPreferences: {
       contextIsolation: true, // protect against prototype pollution

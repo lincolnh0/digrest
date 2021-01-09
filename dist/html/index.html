@@ -10,112 +10,160 @@
   </head>
   <body>
     <div class="container">
-      <form id="digrest-form" action="">
-        <div class="form-row">
-          <div class="form-group col-md-8">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text btn btn-primary" id="protocol-switch">http://</div>
-              </div>
-              <input class="form-control" id="textbox-url" type="text" value="pokeapi.co/api/v2/pokemon/charizard"/>
+      <div class="jumbotron">
+        <h3>DIGREST</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="list-group list-group-root"><a class="list-group-item" href="#item-1" data-toggle="collapse">Collection 1</a>
+            <div class="list-group collapse" id="item-1">
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+            </div><a class="list-group-item" href="#item-2" data-toggle="collapse">Collection 2</a>
+            <div class="list-group collapse" id="item-2">
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+            </div><a class="list-group-item" href="#item-3" data-toggle="collapse">Collection 3</a>
+            <div class="list-group collapse" id="item-3">
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
+              <button class="list-group-item list-group-item-action" type="button">Endpoint 1</button>
             </div>
-          </div>
-          <div class="form-group col-md-2">
-            <select class="form-control" id="select-request">
-              <option value="GET">GET</option>
-              <option value="POST">POST</option>
-              <option value="PUT">PUT</option>
-              <option value="DELETE">DELETE</option>
-              <option value="HEAD">HEAD</option>
-              <option value="CONNECT">CONNECT</option>
-              <option value="TRACE">TRACE</option>
-              <option value="OPTIONS">OPTIONS</option>
-            </select>
-          </div>
-          <div class="form-group col-md-2">
-            <button class="form-control btn btn-primary" id="btn-submit" type="submit">Request</button>
           </div>
         </div>
-        <div class="form-row form-group">
-          <div class="form-row col-md-10">
-            <label class="col-nd-2 col-form-label" for="textbox-full-url">Full URL</label>
-            <input class="form-control-plaintext col-sm-10" id="textbox-full-url" type="text" readonly="readonly"/>
-          </div>
-        </div>
-        <ul class="nav nav-tabs nav-fill">
-          <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#parameter-pane" aria-expanded="false">Parameters</a></li>
-          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#header-pane" aria-expanded="false">Header</a></li>
-          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#authorisation-pane" aria-expanded="false">Authorisation</a></li>
-          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cookie-pane" aria-expanded="false">Cookie</a></li>
-          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#response-pane" aria-expanded="false">Response</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active in show" id="parameter-pane">
-            <div class="form-group">
-              <label for="table-parameters">Key, value pairs that will form the arguments of in the full URL</label>
-              <table class="table table-bordered table-striped table-hover table-condensed text-center" id="table-parameters">
-                <thead>
-                  <tr>
-                    <th class="operation-column">Active</th>
-                    <th class="key-column">Key</th>
-                    <th class="value-column">Value</th>
-                    <th class="description-column">Description</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <button class="btn btn-success form-control" id="btn-parameter-add-row" type="button">Add row</button>
-                </div>
-                <div class="form-group col-md-2">
-                  <button class="btn btn-danger form-control" id="btn-parameter-clear-table" type="button">Clear table</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="header-pane">
-            <div class="form-group">
-              <label for="table-header">Object that contains more complex requests such as application type, authorisation etc.</label>
-              <table class="table table-bordered table-striped table-hover table-condensed text-center" id="table-header">
-                <thead>
-                  <tr>
-                    <th class="operation-column">Active</th>
-                    <th class="key-column">Key</th>
-                    <th class="value-column">Value</th>
-                    <th class="description-column">Description</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <button class="btn btn-success form-control" id="btn-header-add-row" type="button">Add row</button>
-                </div>
-                <div class="form-group col-md-2">
-                  <button class="btn btn-danger form-control" id="btn-header-clear-table" type="button">Clear table       </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="authorisation-pane"></div>
-          <div class="tab-pane" id="cookie-pane"></div>
-          <div class="tab-pane" id="response-pane">
-            <div class="form-group">
-              <label for="textarea-response">Response</label>
-              <textarea class="form-control" id="textarea-response" rows="20" readonly="readonly"></textarea>
-            </div>
+        <div class="col-md-9">
+          <form id="digrest-form" action="">
             <div class="form-row">
-              <div class="col-sm-2">
-                <button class="form-control btn btn-dark" id="btn-copy" type="button"><i class="fas fa-clipboard pr-2"></i>Copy</button>
+              <div class="form-group col-md-8">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text btn btn-primary" id="protocol-switch">http://</div>
+                  </div>
+                  <input class="form-control" id="textbox-url" type="text" value="pokeapi.co/api/v2/pokemon/charizard"/>
+                </div>
               </div>
-              <div class="col-sm-2">
-                <button class="form-control btn btn-light" id="btn-convert" type="button" data-format="yaml">Convert to YAML</button>
+              <div class="form-group col-md-2">
+                <select class="form-control" id="select-request">
+                  <option value="GET">GET</option>
+                  <option value="POST">POST</option>
+                  <option value="PUT">PUT</option>
+                  <option value="DELETE">DELETE</option>
+                  <option value="HEAD">HEAD</option>
+                  <option value="CONNECT">CONNECT</option>
+                  <option value="TRACE">TRACE</option>
+                  <option value="OPTIONS">OPTIONS</option>
+                </select>
+              </div>
+              <div class="form-group col-md-2">
+                <button class="form-control btn btn-primary" id="btn-submit" type="submit">Request</button>
               </div>
             </div>
-          </div>
+            <div class="form-row form-group">
+              <div class="form-row col-md-10">
+                <label class="col-nd-2 col-form-label" for="textbox-full-url">Full URL</label>
+                <input class="form-control-plaintext col-sm-10" id="textbox-full-url" type="text" readonly="readonly"/>
+              </div>
+            </div>
+            <ul class="nav nav-tabs nav-fill">
+              <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#parameter-pane" aria-expanded="false">Parameters</a></li>
+              <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#header-pane" aria-expanded="false">Header</a></li>
+              <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#body-pane" aria-expanded="false">Body</a></li>
+              <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#response-pane" aria-expanded="false">Response</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active in show" id="parameter-pane">
+                <div class="form-group">
+                  <label for="table-parameters">Key, value pairs that will form the arguments of in the full URL</label>
+                  <table class="table table-bordered table-striped table-hover table-condensed text-center" id="table-parameters">
+                    <thead>
+                      <tr>
+                        <th class="operation-column">Active</th>
+                        <th class="key-column">Key</th>
+                        <th class="value-column">Value</th>
+                        <th class="description-column">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <button class="btn btn-success form-control" id="btn-parameter-add-row" type="button">Add row</button>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <button class="btn btn-danger form-control" id="btn-parameter-clear-table" type="button">Clear table</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="header-pane">
+                <div class="form-group">
+                  <table class="table table-bordered table-striped table-hover table-condensed text-center" id="table-header">
+                    <thead>
+                      <tr>
+                        <th class="operation-column">Active</th>
+                        <th class="key-column">Key</th>
+                        <th class="value-column">Value</th>
+                        <th class="description-column">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <button class="btn btn-success form-control" id="btn-header-add-row" type="button">Add row</button>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <button class="btn btn-danger form-control" id="btn-header-clear-table" type="button">Clear table       </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="body-pane">
+                <div class="form-group">
+                  <table class="table table-bordered table-striped table-hover table-condensed text-center" id="table-body">
+                    <thead>
+                      <tr>
+                        <th class="operation-column">Active</th>
+                        <th class="key-column">Key</th>
+                        <th class="value-column">Value</th>
+                        <th class="description-column">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <button class="btn btn-success form-control" id="btn-body-add-row" type="button">Add row</button>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <button class="btn btn-danger form-control" id="btn-body-clear-table" type="button">Clear table       </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="response-pane">
+                <div class="form-group">
+                  <label for="textarea-response">Response</label>
+                  <textarea class="form-control" id="textarea-response" rows="10" readonly="readonly"></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="col-sm-3">
+                    <button class="form-control btn btn-dark" id="btn-copy" type="button"><i class="fas fa-clipboard pr-2"></i>Copy</button>
+                  </div>
+                  <div class="col-sm-3">
+                    <button class="form-control btn btn-light" id="btn-convert" type="button" data-format="yaml">Convert to YAML</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
     <script src="../js/jquery-3.5.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>

@@ -8,94 +8,134 @@ html(lang="en")
         title Digrest API Tester
     body
         .container
+            .jumbotron
+                h3 DIGREST
+            .row
+                .col-md-3
+                    .list-group.list-group-root
+                        a.list-group-item(href="#item-1", data-toggle="collapse") Collection 1
+                        .list-group.collapse#item-1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                        
+                        a.list-group-item(href="#item-2", data-toggle="collapse") Collection 2
+                        .list-group.collapse#item-2
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                        
+                        a.list-group-item(href="#item-3", data-toggle="collapse") Collection 3
+                        .list-group.collapse#item-3
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
+                            button.list-group-item.list-group-item-action(type="button") Endpoint 1
 
-            form#digrest-form(action="")
-                .form-row
-                    .form-group.col-md-8
-                        .input-group
-                            .input-group-prepend
-                                #protocol-switch.input-group-text.btn.btn-primary
-                                    | http://
-                            input#textbox-url.form-control(type="text", value="pokeapi.co/api/v2/pokemon/charizard")
-                    .form-group.col-md-2
-                        select#select-request.form-control
-                            option(value="GET") GET
-                            option(value="POST") POST
-                            option(value="PUT") PUT
-                            option(value="DELETE") DELETE
-                            option(value="HEAD") HEAD
-                            option(value="CONNECT") CONNECT
-                            option(value="TRACE") TRACE
-                            option(value="OPTIONS") OPTIONS
-                    .form-group.col-md-2
-                        button#btn-submit.form-control.btn.btn-primary(type="submit") Request
-                .form-row.form-group
-                    .form-row.col-md-10
-                        label.col-nd-2.col-form-label(for="textbox-full-url") Full URL
-                        input#textbox-full-url.form-control-plaintext.col-sm-10(type="text", readonly)
-                    
-
-                ul.nav.nav-tabs.nav-fill
-                    li.nav-item
-                        a.nav-link.active(data-toggle="tab", href="#parameter-pane", aria-expanded="false") Parameters
-                    li.nav-item
-                        a.nav-link(data-toggle="tab", href="#header-pane", aria-expanded="false") Header
-                    li.nav-item
-                        a.nav-link(data-toggle="tab", href="#authorisation-pane", aria-expanded="false") Authorisation
-                    li.nav-item
-                        a.nav-link(data-toggle="tab", href="#cookie-pane", aria-expanded="false") Cookie
-                    li.nav-item
-                        a.nav-link(data-toggle="tab", href="#response-pane", aria-expanded="false") Response
-                
-                .tab-content
-                    #parameter-pane.tab-pane.active.in.show
-                        .form-group
-                            label(for="table-parameters") Key, value pairs that will form the arguments of in the full URL
-                            table#table-parameters.table.table-bordered.table-striped.table-hover.table-condensed.text-center
-                                thead
-                                    tr
-                                        th.operation-column Active
-                                        th.key-column Key
-                                        th.value-column Value
-                                        th.description-column Description
-                                tbody
-                            .form-row
-                                .form-group.col-md-2
-                                    button#btn-parameter-add-row.btn.btn-success.form-control(type="button") Add row
-                                .form-group.col-md-2
-                                    button#btn-parameter-clear-table.btn.btn-danger.form-control(type="button") Clear table
-                    #header-pane.tab-pane
-                        .form-group
-                            label(for="table-header") Object that contains more complex requests such as application type, authorisation etc.
-                            table#table-header.table.table-bordered.table-striped.table-hover.table-condensed.text-center
-                                thead
-                                    tr
-                                        th.operation-column Active
-                                        th.key-column Key
-                                        th.value-column Value
-                                        th.description-column Description
-                                tbody
-                            .form-row
-                                .form-group.col-md-2
-                                    button#btn-header-add-row.btn.btn-success.form-control(type="button") Add row
-                                .form-group.col-md-2
-                                    button#btn-header-clear-table.btn.btn-danger.form-control(type="button") Clear table       
-                    
-                    #authorisation-pane.tab-pane
-                    
-                    #cookie-pane.tab-pane
-                    
-                    #response-pane.tab-pane
-                        .form-group
-                            label(for="textarea-response") Response
-                            textarea#textarea-response.form-control(rows="20", readonly)
+                .col-md-9
+                    form#digrest-form(action="")
                         .form-row
-                            .col-sm-2
-                                button#btn-copy.form-control.btn.btn-dark(type="button")
-                                    i.fas.fa-clipboard.pr-2
-                                    |Copy
-                            .col-sm-2
-                                button#btn-convert.form-control.btn.btn-light(type="button", data-format="yaml") Convert to YAML
+                            .form-group.col-md-8
+                                .input-group
+                                    .input-group-prepend
+                                        #protocol-switch.input-group-text.btn.btn-primary
+                                            | http://
+                                    input#textbox-url.form-control(type="text", value="pokeapi.co/api/v2/pokemon/charizard")
+                            .form-group.col-md-2
+                                select#select-request.form-control
+                                    option(value="GET") GET
+                                    option(value="POST") POST
+                                    option(value="PUT") PUT
+                                    option(value="DELETE") DELETE
+                                    option(value="HEAD") HEAD
+                                    option(value="CONNECT") CONNECT
+                                    option(value="TRACE") TRACE
+                                    option(value="OPTIONS") OPTIONS
+                            .form-group.col-md-2
+                                button#btn-submit.form-control.btn.btn-primary(type="submit") Request
+                        .form-row.form-group
+                            .form-row.col-md-10
+                                label.col-nd-2.col-form-label(for="textbox-full-url") Full URL
+                                input#textbox-full-url.form-control-plaintext.col-sm-10(type="text", readonly)
+                            
+
+                        ul.nav.nav-tabs.nav-fill
+                            li.nav-item
+                                a.nav-link.active(data-toggle="tab", href="#parameter-pane", aria-expanded="false") Parameters
+                            li.nav-item
+                                a.nav-link(data-toggle="tab", href="#header-pane", aria-expanded="false") Header
+                            li.nav-item
+                                a.nav-link(data-toggle="tab", href="#body-pane", aria-expanded="false") Body
+                            //- li.nav-item
+                            //-     a.nav-link(data-toggle="tab", href="#cookie-pane", aria-expanded="false") Cookie
+                            li.nav-item
+                                a.nav-link(data-toggle="tab", href="#response-pane", aria-expanded="false") Response
+                        
+                        .tab-content
+                            #parameter-pane.tab-pane.active.in.show
+                                .form-group
+                                    label(for="table-parameters") Key, value pairs that will form the arguments of in the full URL
+                                    table#table-parameters.table.table-bordered.table-striped.table-hover.table-condensed.text-center
+                                        thead
+                                            tr
+                                                th.operation-column Active
+                                                th.key-column Key
+                                                th.value-column Value
+                                                th.description-column Description
+                                        tbody
+                                    .form-row
+                                        .form-group.col-md-2
+                                            button#btn-parameter-add-row.btn.btn-success.form-control(type="button") Add row
+                                        .form-group.col-md-2
+                                            button#btn-parameter-clear-table.btn.btn-danger.form-control(type="button") Clear table
+                            #header-pane.tab-pane
+                                .form-group
+                                    table#table-header.table.table-bordered.table-striped.table-hover.table-condensed.text-center
+                                        thead
+                                            tr
+                                                th.operation-column Active
+                                                th.key-column Key
+                                                th.value-column Value
+                                                th.description-column Description
+                                        tbody
+                                    .form-row
+                                        .form-group.col-md-2
+                                            button#btn-header-add-row.btn.btn-success.form-control(type="button") Add row
+                                        .form-group.col-md-2
+                                            button#btn-header-clear-table.btn.btn-danger.form-control(type="button") Clear table       
+                            
+                            #body-pane.tab-pane
+                                .form-group
+                                        table#table-body.table.table-bordered.table-striped.table-hover.table-condensed.text-center
+                                            thead
+                                                tr
+                                                    th.operation-column Active
+                                                    th.key-column Key
+                                                    th.value-column Value
+                                                    th.description-column Description
+                                            tbody
+                                        .form-row
+                                            .form-group.col-md-2
+                                                button#btn-body-add-row.btn.btn-success.form-control(type="button") Add row
+                                            .form-group.col-md-2
+                                                button#btn-body-clear-table.btn.btn-danger.form-control(type="button") Clear table       
+                                
+                            
+                            //- #cookie-pane.tab-pane
+                            
+                            #response-pane.tab-pane
+                                .form-group
+                                    label(for="textarea-response") Response
+                                    textarea#textarea-response.form-control(rows="10", readonly)
+                                .form-row
+                                    .col-sm-3
+                                        button#btn-copy.form-control.btn.btn-dark(type="button")
+                                            i.fas.fa-clipboard.pr-2
+                                            |Copy
+                                    .col-sm-3
+                                        button#btn-convert.form-control.btn.btn-light(type="button", data-format="yaml") Convert to YAML
                 
         script(src="../js/jquery-3.5.1.min.js")
         script(src="../js/bootstrap.min.js")

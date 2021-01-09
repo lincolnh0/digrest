@@ -25,6 +25,10 @@ function add_event_listeners_to_form() {
     addHeaderRowBtn.addEventListener('click', addRowToTable)
     addHeaderRowBtn.tableId = 'table-header';
 
+    const addBodyRowBtn = document.getElementById('btn-body-add-row');
+    addBodyRowBtn.addEventListener('click', addRowToTable)
+    addBodyRowBtn.tableId = 'table-body';
+
     const clearParameterTableBtn = document.getElementById('btn-parameter-clear-table');
     clearParameterTableBtn.addEventListener('click', clearTable)
     clearParameterTableBtn.tableId = 'table-parameters';
@@ -33,6 +37,10 @@ function add_event_listeners_to_form() {
     const clearHeaderTableBtn = document.getElementById('btn-header-clear-table');
     clearHeaderTableBtn.addEventListener('click', clearTable)
     clearHeaderTableBtn.tableId = 'table-header';
+
+    const clearnBodyTableBtn = document.getElementById('btn-body-clear-table');
+    clearnBodyTableBtn.addEventListener('click', clearTable)
+    clearnBodyTableBtn.tableId = 'table-body';
 
     // Add copy and convert event listeners.
     const copyBtn = document.getElementById('btn-copy')
@@ -51,6 +59,9 @@ function add_event_listeners_to_form() {
         },
         {
             currentTarget: { tableId: 'table-header' }
+        },
+        {
+            currentTarget: { tableId: 'table-body' }
         }
     ]
     initialTableObjects.forEach((element) => {
@@ -207,11 +218,14 @@ function updateFullUrl() {
 async function http_request(url, httpMethod) {
     const responseTextArea = document.getElementById('textarea-response');
     const headerObj = constructHeaderObject();
+    const bodyObj = constructBodyObject();
     try {
         const requestObject = {
             method: httpMethod
         }
         if (headerObj != null) requestObject.headers = headerObj;
+        if (bodyObj != null) requestObject.data = bodyObj;
+        console.log(requestObject)
         const response = await fetch(url, requestObject);
         responseObj = await response.json();
         responseTextArea.value = JSON.stringify(responseObj, null, 4);
@@ -235,6 +249,23 @@ function constructHeaderObject() {
                 
                 const key = document.getElementById('header-key-' + index).innerText
                 const value = document.getElementById('header-value-' + index).innerText
+                
+                returnObject[key] = value;
+            }
+        }
+        return returnObject;
+    }
+}
+
+function constructBodyObject() {
+    const bodyTableBody = document.getElementById('table-body').getElementsByTagName('tbody')[0];
+    if (bodyTableBody.firstChild && document.getElementById('body-key-0').innerText != '') {
+        let returnObject = {};
+        for (let [index, row] of bodyTableBody.childNodes.entries()) {
+            if (document.getElementById('checkbox-active-body-' + index).checked) {
+                
+                const key = document.getElementById('body-key-' + index).innerText
+                const value = document.getElementById('body-value-' + index).innerText
                 
                 returnObject[key] = value;
             }
