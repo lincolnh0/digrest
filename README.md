@@ -9,3 +9,8 @@ Built with electronJS.
 - [ ] Cookies interface
 - [ ] Creating collections
 - [ ] Importing and exporting collections.
+
+## Installation
+- Clone the repo
+- Install dependencies
+- Run the program with the `start` action
