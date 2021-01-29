@@ -1,7 +1,6 @@
 # Digrest API Tester
 
-Open source API tester that works offline.
-
+Restful API tester.
 Built with electronJS.
 
 ## Roadmap
